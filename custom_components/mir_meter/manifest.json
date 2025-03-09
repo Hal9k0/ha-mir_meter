@@ -1,0 +1,30 @@
+{
+  "domain": "mir_meter",
+  "name": "MIR meter",
+  "codeowners": [
+    "@Hal9k0"
+  ],
+  "config_flow": true,
+  "dependencies": ["bluetooth_adapters"],
+  "documentation": "https://github.com/Hal9k0/ha-mir_meter",
+  "issue_tracker": "https://github.com/Hal9k0/ha-mir_meter/issues",
+  "iot_class": "local_polling",
+  "loggers": ["mirmeter"],
+  "requirements": ["mirmeter==0.1.1"],
+  "version": "0.1.1",
+  "integration_type": "device",
+  "bluetooth": [
+    {
+      "local_name": "C04-*",
+      "connectable": true
+    },
+    {
+      "local_name": "C05-*",
+      "connectable": true
+    },
+    {
+      "local_name": "C07-*",
+      "connectable": true
+    }
+  ]
+}
