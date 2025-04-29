@@ -22,16 +22,13 @@ _PLATFORMS: list[Platform] = [Platform.SENSOR]
 type MIRMeterConfigEntry = ConfigEntry[MIRMeter]
 
 
-async def async_setup_entry(
-    hass: HomeAssistant, config_entry: MIRMeterConfigEntry
-) -> bool:
+async def async_setup_entry(hass: HomeAssistant, config_entry: MIRMeterConfigEntry) -> bool:
     """Set up mir_meter from a config entry."""
     address = config_entry.data[CONF_MAC]
     ble_device = bluetooth.async_ble_device_from_address(hass, address, True)
     if not ble_device:
-        raise ConfigEntryNotReady(
-            f"Could not find MIR meter BLE device with address {address}"
-        )
+        raise ConfigEntryNotReady(f"Could not find MIR meter BLE device with address {address}")
+
     bleak_scanner = bluetooth.async_get_scanner(hass)
     mir_meter = MIRMeter(bleak_scanner, ble_device, config_entry.data[CONF_PIN])
     coordinator = MIRMeterCoordinator(hass, config_entry, mir_meter)
@@ -42,8 +39,6 @@ async def async_setup_entry(
     return True
 
 
-async def async_unload_entry(
-    hass: HomeAssistant, config_entry: MIRMeterConfigEntry
-) -> bool:
+async def async_unload_entry(hass: HomeAssistant, config_entry: MIRMeterConfigEntry) -> bool:
     """Unload a config entry."""
     return await hass.config_entries.async_unload_platforms(config_entry, _PLATFORMS)

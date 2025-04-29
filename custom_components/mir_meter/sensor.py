@@ -9,7 +9,7 @@ from homeassistant.helpers import update_coordinator
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from .const import DOMAIN, SENSOR_TYPES, MirMeterSensorEntityDescription
+from .const import DOMAIN, SENSOR_TYPES_1PHASE, SENSOR_TYPES_3PHASE, MirMeterSensorEntityDescription
 from .coordinator import MIRMeterCoordinator
 
 
@@ -19,13 +19,17 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up entities."""
+
     coordinator = hass.data[DOMAIN][config_entry.entry_id]
-    async_add_entities(
-        IammeterSensor(coordinator, description) for description in SENSOR_TYPES
-    )
+    if coordinator.config_entry.title.startswith("C05-"):
+        async_add_entities(MirmeterSensor(coordinator, description) for description in SENSOR_TYPES_1PHASE)
+    elif coordinator.config_entry.title.startswith("C04-") or coordinator.config_entry.title.startswith("C07-"):
+        async_add_entities(
+            MirmeterSensor(coordinator, description) for description in SENSOR_TYPES_1PHASE + SENSOR_TYPES_3PHASE
+        )
 
 
-class IammeterSensor(update_coordinator.CoordinatorEntity, SensorEntity):
+class MirmeterSensor(update_coordinator.CoordinatorEntity, SensorEntity):
     """Representation of a Sensor."""
 
     entity_description: MirMeterSensorEntityDescription

@@ -25,8 +25,8 @@
     "error": {
       "no_bluetooth_adapter": "Bluetooth-адаптер не найден",
       "no_device_found": "Не удалось найти Bluetooth-устройство счётчика",
-      "invalid_auth": "Invalid authentication",
-      "unknown": "Неверный PIN-код"
+      "invalid_auth": "Неверный PIN-код или отсутствует соединение со счетчиком",
+      "unknown": "Неизвестная ошибка"
     },
     "abort": {
       "already_configured": "Устройство уже настроено",
@@ -38,16 +38,16 @@
       "positive_active_energy_total": {
         "name": "Активная энергия прямая, всего"
       },
-      "positive_active_energy_tariff_1": {
+      "positive_active_energy_in_tariff_1": {
         "name": "Активная энергия прямая по тарифу 1"
       },
-      "positive_active_energy_tariff_2": {
+      "positive_active_energy_in_tariff_2": {
         "name": "Активная энергия прямая по тарифу 2"
       },
-      "current_time": {
+      "meter_time": {
         "name": "Время на счётчике"
       },
-      "current_date": {
+      "meter_date": {
         "name": "Дата на счётчике"
       },
       "instantaneous_current_of_phase_a": {
@@ -65,7 +65,7 @@
       "mains_frequency": {
         "name": "Частота сети"
       },
-      "current_temperature": {
+      "meter_temperature": {
         "name": "Температура счётчика"
       },
       "instantaneous_apparent_power": {
@@ -86,31 +86,31 @@
       "negative_reactive_energy_total": {
         "name": "Реактивная энергия обратная, всего"
       },
-      "total_operation_time": {
+      "meter_total_operation_time": {
         "name": "Общее время работы счетчика"
       },
-      "pm_positive_active_energy_total": {
+      "past_month_positive_active_energy_total": {
         "name": "Прошлый месяц: Активная энергия прямая, всего"
       },
-      "pm_positive_active_energy_tariff_1": {
+      "past_month_positive_active_energy_in_tariff_1": {
         "name": "Прошлый месяц: Активная энергия прямая по тарифу 1"
       },
-      "pm_positive_active_energy_tariff_2": {
+      "past_month_positive_active_energy_in_tariff_2": {
         "name": "Прошлый месяц: Активная энергия прямая по тарифу 2"
       },
-      "pm_positive_active_energy_tariff_3": {
+      "past_month_positive_active_energy_in_tariff_3": {
         "name": "Прошлый месяц: Активная энергия прямая по тарифу 3"
       },
-      "pm_positive_active_energy_tariff_4": {
+      "past_month_positive_active_energy_in_tariff_4": {
         "name": "Прошлый месяц: Активная энергия прямая по тарифу 4"
       },
-      "pm_negative_active_energy_total": {
+      "past_month_negative_active_energy_total": {
         "name": "Прошлый месяц: Активная энергия обратная, всего"
       },
-      "pm_positive_reactive_energy_total": {
+      "past_month_positive_reactive_energy_total": {
         "name": "Прошлый месяц: Реактивная энергия прямая, всего"
       },
-      "pm_negative_reactive_energy_total": {
+      "past_month_negative_reactive_energy_total": {
         "name": "Прошлый месяц: Реактивная энергия обратная, всего"
       },
       "factory_number": {
@@ -139,6 +139,72 @@
       },
       "spodes_specification_version": {
         "name": "Версия спецификации СПОДЭС"
+      },
+      "instantaneous_current_of_phase_b": {
+        "name": "Текущий ток фазы B"
+      },
+      "instantaneous_current_of_phase_c": {
+        "name": "Текущий ток фазы C"
+      },
+      "instantaneous_voltage_of_phase_b": {
+        "name": "Текущее напряжение фазы B"
+      },
+      "instantaneous_voltage_of_phase_c": {
+        "name": "Текущее напряжение фазы C"
+      },
+      "instantaneous_power_factor_of_phase_a": {
+        "name": "Текущий коэффициент мощности фазы A"
+      },
+      "instantaneous_power_factor_of_phase_b": {
+        "name": "Текущий коэффициент мощности фазы B"
+      },
+      "instantaneous_power_factor_of_phase_c": {
+        "name": "Текущий коэффициент мощности фазы C"
+      },
+      "instantaneous_reactive_power_factor_of_phase_a": {
+        "name": "Текущий коэффициент реактивной мощности фазы A"
+      },
+      "instantaneous_reactive_power_factor_of_phase_b": {
+        "name": "Текущий коэффициент реактивной мощности фазы B"
+      },
+      "instantaneous_reactive_power_factor_of_phase_c": {
+        "name": "Текущий коэффициент реактивной мощности фазы C"
+      },
+      "instantaneous_apparent_power_of_phase_a": {
+        "name": "Текущая полная мощность фазы A"
+      },
+      "instantaneous_apparent_power_of_phase_b": {
+        "name": "Текущая полная мощность фазы B"
+      },
+      "instantaneous_apparent_power_of_phase_c": {
+        "name": "Текущая полная мощность фазы C"
+      },
+      "instantaneous_active_power_of_phase_a": {
+        "name": "Текущая активная мощность фазы A"
+      },
+      "instantaneous_active_power_of_phase_b": {
+        "name": "Текущая активная мощность фазы B"
+      },
+      "instantaneous_active_power_of_phase_c": {
+        "name": "Текущая активная мощность фазы C"
+      },
+      "instantaneous_reactive_power_of_phase_a": {
+        "name": "Текущая реактивная мощность фазы A"
+      },
+      "instantaneous_reactive_power_of_phase_b": {
+        "name": "Текущая реактивная мощность фазы B"
+      },
+      "instantaneous_reactive_power_of_phase_c": {
+        "name": "Текущая реактивная мощность фазы C"
+      },
+      "instantaneous_line_to_line_voltage_ab": {
+        "name": "Текущее межфазное напряжение AB"
+      },
+      "instantaneous_line_to_line_voltage_bc": {
+        "name": "Текущее межфазное напряжение BC"
+      },
+      "instantaneous_line_to_line_voltage_ac": {
+        "name": "Текущее межфазное напряжение AC"
       }
     }
   }

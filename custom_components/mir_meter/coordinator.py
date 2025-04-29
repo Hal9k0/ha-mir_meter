@@ -21,9 +21,7 @@ _LOGGER = logging.getLogger(__name__)
 class MIRMeterCoordinator(DataUpdateCoordinator[dict[int, dict[str, Any]]]):
     """Coordinator is responsible for querying the device at a specified route."""
 
-    def __init__(
-        self, hass: HomeAssistant, entry: ConfigEntry, mir_meter: MIRMeter
-    ) -> None:
+    def __init__(self, hass: HomeAssistant, entry: ConfigEntry, mir_meter: MIRMeter) -> None:
         """Initialize the data object."""
         super().__init__(hass, _LOGGER, name="MIRMeter", update_interval=SCAN_INTERVAL)
         self.unique_id = entry.entry_id

@@ -6,6 +6,7 @@ import logging
 from typing import Any
 
 from bleak.backends.device import BLEDevice
+from bleak.exc import BleakError
 from mirmeter.client import MIRMeter
 import voluptuous as vol
 
@@ -52,7 +53,7 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
 
     pin_ok = await mir_meter.check_pin()
     if not pin_ok:
-        _LOGGER.error("An incorrect PIN code or meter has blocked you for a while")
+        _LOGGER.error("Invalid PIN code or meter has blocked you for a while")
         raise InvalidAuth
 
     return {"title": device.name, "address": device.address}
@@ -64,9 +65,7 @@ class ConfigFlow(ConfigFlow, domain=DOMAIN):
     VERSION = 1
     _device: BLEDevice
 
-    async def async_step_bluetooth(
-        self, discovery_info: BluetoothServiceInfoBleak
-    ) -> ConfigFlowResult:
+    async def async_step_bluetooth(self, discovery_info: BluetoothServiceInfoBleak) -> ConfigFlowResult:
         """Handle the bluetooth discovery step."""
         _LOGGER.debug("Discovered bluetooth device: %s", discovery_info.as_dict())
 
@@ -78,9 +77,7 @@ class ConfigFlow(ConfigFlow, domain=DOMAIN):
 
         return await self.async_step_pin()
 
-    async def async_step_user(
-        self, user_input: dict[str, Any] | None = None
-    ) -> ConfigFlowResult:
+    async def async_step_user(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
         """Handle a flow initialized by the user."""
         errors: dict[str, str] = {}
         if user_input is not None:
@@ -90,10 +87,10 @@ class ConfigFlow(ConfigFlow, domain=DOMAIN):
                 errors["base"] = "no_bluetooth_adapter"
             except NoDeviceFound:
                 errors["base"] = "no_device_found"
-            except InvalidAuth:
+            except (InvalidAuth, BleakError, TimeoutError):
                 errors["base"] = "invalid_auth"
             except Exception:
-                _LOGGER.exception("Unexpected exception")
+                _LOGGER.exception("Unknown exception")
                 errors["base"] = "unknown"
             else:
                 await self.async_set_unique_id(info["address"])
@@ -107,23 +104,19 @@ class ConfigFlow(ConfigFlow, domain=DOMAIN):
                     },
                 )
 
-        return self.async_show_form(
-            step_id="user", data_schema=STEP_USER_DATA_SCHEMA, errors=errors
-        )
+        return self.async_show_form(step_id="user", data_schema=STEP_USER_DATA_SCHEMA, errors=errors)
 
-    async def async_step_pin(
-        self, user_input: dict[str, Any] | None = None
-    ) -> ConfigFlowResult:
+    async def async_step_pin(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
         """Add a pin code."""
         errors: dict[str, str] = {}
         if user_input is not None:
             try:
                 user_input[CONF_NAME] = self._device
                 info = await validate_input(self.hass, user_input)
-            except InvalidAuth:
+            except (InvalidAuth, BleakError, TimeoutError):
                 errors["base"] = "invalid_auth"
             except Exception:
-                _LOGGER.exception("Unexpected exception")
+                _LOGGER.exception("Unknown exception")
                 errors["base"] = "unknown"
             else:
                 return self.async_create_entry(

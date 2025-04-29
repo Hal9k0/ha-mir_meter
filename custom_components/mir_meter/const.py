@@ -7,11 +7,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Final
 
-from homeassistant.components.sensor import (
-    SensorDeviceClass,
-    SensorEntityDescription,
-    SensorStateClass,
-)
+from homeassistant.components.sensor import SensorDeviceClass, SensorEntityDescription, SensorStateClass
 from homeassistant.const import (
     SIGNAL_STRENGTH_DECIBELS_MILLIWATT,
     EntityCategory,
@@ -33,12 +29,12 @@ KILO_VOLT_AMPERE_REACTIVE_HOUR: Final = "kvarh"
 
 @dataclass
 class MirMeterSensorEntityDescription(SensorEntityDescription):
-    """Describes Iammeter sensor entity."""
+    """Describes Mirmeter sensor entity."""
 
     value: Callable[[float | int], float] | Callable[[datetime], datetime] | None = None
 
 
-SENSOR_TYPES: tuple[MirMeterSensorEntityDescription, ...] = (
+SENSOR_TYPES_1PHASE: tuple[MirMeterSensorEntityDescription, ...] = (
     MirMeterSensorEntityDescription(
         key="1.0.1.8.0.255",
         translation_key="positive_active_energy_total",
@@ -49,7 +45,7 @@ SENSOR_TYPES: tuple[MirMeterSensorEntityDescription, ...] = (
     ),
     MirMeterSensorEntityDescription(
         key="1.0.1.8.1.255",
-        translation_key="positive_active_energy_tariff_1",
+        translation_key="positive_active_energy_in_tariff_1",
         icon="mdi:meter-electric-outline",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -58,7 +54,7 @@ SENSOR_TYPES: tuple[MirMeterSensorEntityDescription, ...] = (
     ),
     MirMeterSensorEntityDescription(
         key="1.0.1.8.2.255",
-        translation_key="positive_active_energy_tariff_2",
+        translation_key="positive_active_energy_in_tariff_2",
         icon="mdi:meter-electric-outline",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -67,13 +63,13 @@ SENSOR_TYPES: tuple[MirMeterSensorEntityDescription, ...] = (
     ),
     MirMeterSensorEntityDescription(
         key="1.0.0.9.1.255",
-        translation_key="current_time",
+        translation_key="meter_time",
         icon="mdi:clock-outline",
         entity_category=EntityCategory.DIAGNOSTIC,
     ),
     MirMeterSensorEntityDescription(
         key="1.0.0.9.2.255",
-        translation_key="current_date",
+        translation_key="meter_date",
         icon="mdi:calendar",
         entity_category=EntityCategory.DIAGNOSTIC,
     ),
@@ -116,7 +112,7 @@ SENSOR_TYPES: tuple[MirMeterSensorEntityDescription, ...] = (
     ),
     MirMeterSensorEntityDescription(
         key="0.0.96.9.0.255",
-        translation_key="current_temperature",
+        translation_key="meter_temperature",
         icon="mdi:thermometer-lines",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         state_class=SensorStateClass.MEASUREMENT,
@@ -178,13 +174,13 @@ SENSOR_TYPES: tuple[MirMeterSensorEntityDescription, ...] = (
     ),
     MirMeterSensorEntityDescription(
         key="0.0.96.8.0.255",
-        translation_key="total_operation_time",
+        translation_key="meter_total_operation_time",
         icon="mdi:information-outline",
         entity_category=EntityCategory.DIAGNOSTIC,
     ),
     MirMeterSensorEntityDescription(
         key="1.0.1.17.0.255",
-        translation_key="pm_positive_active_energy_total",
+        translation_key="past_month_positive_active_energy_total",
         icon="mdi:calendar-arrow-left",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -194,7 +190,7 @@ SENSOR_TYPES: tuple[MirMeterSensorEntityDescription, ...] = (
     ),
     MirMeterSensorEntityDescription(
         key="1.0.1.17.1.255",
-        translation_key="pm_positive_active_energy_tariff_1",
+        translation_key="past_month_positive_active_energy_in_tariff_1",
         icon="mdi:calendar-arrow-left",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -204,7 +200,7 @@ SENSOR_TYPES: tuple[MirMeterSensorEntityDescription, ...] = (
     ),
     MirMeterSensorEntityDescription(
         key="1.0.1.17.2.255",
-        translation_key="pm_positive_active_energy_tariff_2",
+        translation_key="past_month_positive_active_energy_in_tariff_2",
         icon="mdi:calendar-arrow-left",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -214,7 +210,7 @@ SENSOR_TYPES: tuple[MirMeterSensorEntityDescription, ...] = (
     ),
     MirMeterSensorEntityDescription(
         key="1.0.1.17.3.255",
-        translation_key="pm_positive_active_energy_tariff_3",
+        translation_key="past_month_positive_active_energy_in_tariff_3",
         icon="mdi:calendar-arrow-left",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -224,7 +220,7 @@ SENSOR_TYPES: tuple[MirMeterSensorEntityDescription, ...] = (
     ),
     MirMeterSensorEntityDescription(
         key="1.0.1.17.4.255",
-        translation_key="pm_positive_active_energy_tariff_4",
+        translation_key="past_month_positive_active_energy_in_tariff_4",
         icon="mdi:calendar-arrow-left",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -234,7 +230,7 @@ SENSOR_TYPES: tuple[MirMeterSensorEntityDescription, ...] = (
     ),
     MirMeterSensorEntityDescription(
         key="1.0.2.17.0.255",
-        translation_key="pm_negative_active_energy_total",
+        translation_key="past_month_negative_active_energy_total",
         icon="mdi:calendar-arrow-left",
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -244,7 +240,7 @@ SENSOR_TYPES: tuple[MirMeterSensorEntityDescription, ...] = (
     ),
     MirMeterSensorEntityDescription(
         key="1.0.3.17.0.255",
-        translation_key="pm_positive_reactive_energy_total",
+        translation_key="past_month_positive_reactive_energy_total",
         icon="mdi:calendar-arrow-left",
         native_unit_of_measurement=KILO_VOLT_AMPERE_REACTIVE_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -254,7 +250,7 @@ SENSOR_TYPES: tuple[MirMeterSensorEntityDescription, ...] = (
     ),
     MirMeterSensorEntityDescription(
         key="1.0.4.17.0.255",
-        translation_key="pm_negative_reactive_energy_total",
+        translation_key="past_month_negative_reactive_energy_total",
         icon="mdi:calendar-arrow-left",
         native_unit_of_measurement=KILO_VOLT_AMPERE_REACTIVE_HOUR,
         state_class=SensorStateClass.TOTAL_INCREASING,
@@ -318,5 +314,181 @@ SENSOR_TYPES: tuple[MirMeterSensorEntityDescription, ...] = (
         translation_key="spodes_specification_version",
         icon="mdi:information-outline",
         entity_category=EntityCategory.DIAGNOSTIC,
+    ),
+)
+
+SENSOR_TYPES_3PHASE: tuple[MirMeterSensorEntityDescription, ...] = (
+    MirMeterSensorEntityDescription(
+        key="1.0.51.7.0.255",
+        translation_key="instantaneous_current_of_phase_b",
+        icon="mdi:current-ac",
+        native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.CURRENT,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.71.7.0.255",
+        translation_key="instantaneous_current_of_phase_c",
+        icon="mdi:current-ac",
+        native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.CURRENT,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.52.7.0.255",
+        translation_key="instantaneous_voltage_of_phase_b",
+        icon="mdi:lightning-bolt-outline",
+        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.VOLTAGE,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.72.7.0.255",
+        translation_key="instantaneous_voltage_of_phase_c",
+        icon="mdi:lightning-bolt-outline",
+        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.VOLTAGE,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.33.7.0.255",
+        translation_key="instantaneous_power_factor_of_phase_a",
+        icon="mdi:scale-balance",
+        state_class=SensorStateClass.MEASUREMENT,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.53.7.0.255",
+        translation_key="instantaneous_power_factor_of_phase_b",
+        icon="mdi:scale-balance",
+        state_class=SensorStateClass.MEASUREMENT,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.73.7.0.255",
+        translation_key="instantaneous_power_factor_of_phase_c",
+        icon="mdi:scale-balance",
+        state_class=SensorStateClass.MEASUREMENT,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.128.7.0.255",
+        translation_key="instantaneous_reactive_power_factor_of_phase_a",
+        icon="mdi:scale-balance",
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_registry_enabled_default=False,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.129.7.0.255",
+        translation_key="instantaneous_reactive_power_factor_of_phase_b",
+        icon="mdi:scale-balance",
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_registry_enabled_default=False,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.130.7.0.255",
+        translation_key="instantaneous_reactive_power_factor_of_phase_c",
+        icon="mdi:scale-balance",
+        state_class=SensorStateClass.MEASUREMENT,
+        entity_registry_enabled_default=False,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.29.7.0.255",
+        translation_key="instantaneous_apparent_power_of_phase_a",
+        icon="mdi:home-lightning-bolt-outline",
+        native_unit_of_measurement=KILO_VOLT_AMPERE,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.APPARENT_POWER,
+        entity_registry_enabled_default=False,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.49.7.0.255",
+        translation_key="instantaneous_apparent_power_of_phase_b",
+        icon="mdi:home-lightning-bolt-outline",
+        native_unit_of_measurement=KILO_VOLT_AMPERE,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.APPARENT_POWER,
+        entity_registry_enabled_default=False,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.69.7.0.255",
+        translation_key="instantaneous_apparent_power_of_phase_c",
+        icon="mdi:home-lightning-bolt-outline",
+        native_unit_of_measurement=KILO_VOLT_AMPERE,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.APPARENT_POWER,
+        entity_registry_enabled_default=False,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.21.7.0.255",
+        translation_key="instantaneous_active_power_of_phase_a",
+        icon="mdi:home-lightning-bolt-outline",
+        native_unit_of_measurement=UnitOfPower.KILO_WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.POWER,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.41.7.0.255",
+        translation_key="instantaneous_active_power_of_phase_b",
+        icon="mdi:home-lightning-bolt-outline",
+        native_unit_of_measurement=UnitOfPower.KILO_WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.POWER,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.61.7.0.255",
+        translation_key="instantaneous_active_power_of_phase_c",
+        icon="mdi:home-lightning-bolt-outline",
+        native_unit_of_measurement=UnitOfPower.KILO_WATT,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.POWER,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.23.7.0.255",
+        translation_key="instantaneous_reactive_power_of_phase_a",
+        icon="mdi:home-lightning-bolt-outline",
+        native_unit_of_measurement=KILO_VOLT_AMPERE_REACTIVE,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.REACTIVE_POWER,
+        entity_registry_enabled_default=False,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.43.7.0.255",
+        translation_key="instantaneous_reactive_power_of_phase_b",
+        icon="mdi:home-lightning-bolt-outline",
+        native_unit_of_measurement=KILO_VOLT_AMPERE_REACTIVE,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.REACTIVE_POWER,
+        entity_registry_enabled_default=False,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.63.7.0.255",
+        translation_key="instantaneous_reactive_power_of_phase_c",
+        icon="mdi:home-lightning-bolt-outline",
+        native_unit_of_measurement=KILO_VOLT_AMPERE_REACTIVE,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.REACTIVE_POWER,
+        entity_registry_enabled_default=False,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.12.7.1.255",
+        translation_key="instantaneous_line_to_line_voltage_ab",
+        icon="mdi:lightning-bolt-outline",
+        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.VOLTAGE,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.12.7.2.255",
+        translation_key="instantaneous_line_to_line_voltage_bc",
+        icon="mdi:lightning-bolt-outline",
+        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.VOLTAGE,
+    ),
+    MirMeterSensorEntityDescription(
+        key="1.0.12.7.3.255",
+        translation_key="instantaneous_line_to_line_voltage_ac",
+        icon="mdi:lightning-bolt-outline",
+        native_unit_of_measurement=UnitOfElectricPotential.VOLT,
+        state_class=SensorStateClass.MEASUREMENT,
+        device_class=SensorDeviceClass.VOLTAGE,
     ),
 )

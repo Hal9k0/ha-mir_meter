@@ -25,8 +25,8 @@
     "error": {
       "no_bluetooth_adapter": "No bluetooth adapter found",
       "no_device_found": "Could not find meter bluetooth device",
-      "invalid_auth": "Invalid PIN code",
-      "unknown": "Unexpected error"
+      "invalid_auth": "Invalid PIN code or there is no connection with the meter",
+      "unknown": "Unknown error"
     },
     "abort": {
       "already_configured": "Device is already configured",
@@ -38,16 +38,16 @@
       "positive_active_energy_total": {
         "name": "Positive active energy total"
       },
-      "positive_active_energy_tariff_1": {
+      "positive_active_energy_in_tariff_1": {
         "name": "Positive active energy in tariff 1"
       },
-      "positive_active_energy_tariff_2": {
+      "positive_active_energy_in_tariff_2": {
         "name": "Positive active energy in tariff 2"
       },
-      "current_time": {
+      "meter_time": {
         "name": "Meter time"
       },
-      "current_date": {
+      "meter_date": {
         "name": "Meter date"
       },
       "instantaneous_current_of_phase_a": {
@@ -65,8 +65,8 @@
       "mains_frequency": {
         "name": "Mains frequency"
       },
-      "current_temperature": {
-        "name": "Temperature of the meter"
+      "meter_temperature": {
+        "name": "Meter temperature"
       },
       "instantaneous_apparent_power": {
         "name": "Instantaneous apparent power"
@@ -86,31 +86,31 @@
       "negative_reactive_energy_total": {
         "name": "Negative reactive energy total"
       },
-      "total_operation_time": {
+      "meter_total_operation_time": {
         "name": "Meter total operation time"
       },
-      "pm_positive_active_energy_total": {
+      "past_month_positive_active_energy_total": {
         "name": "Past month: Positive active energy total"
       },
-      "pm_positive_active_energy_tariff_1": {
+      "past_month_positive_active_energy_in_tariff_1": {
         "name": "Past month: Positive active energy in tariff 1"
       },
-      "pm_positive_active_energy_tariff_2": {
+      "past_month_positive_active_energy_in_tariff_2": {
         "name": "Past month: Positive active energy in tariff 2"
       },
-      "pm_positive_active_energy_tariff_3": {
+      "past_month_positive_active_energy_in_tariff_3": {
         "name": "Past month: Positive active energy in tariff 3"
       },
-      "pm_positive_active_energy_tariff_4": {
+      "past_month_positive_active_energy_in_tariff_4": {
         "name": "Past month: Positive active energy in tariff 4"
       },
-      "pm_negative_active_energy_total": {
+      "past_month_negative_active_energy_total": {
         "name": "Past month: Negative active energy total"
       },
-      "pm_positive_reactive_energy_total": {
+      "past_month_positive_reactive_energy_total": {
         "name": "Past month: Positive reactive energy total"
       },
-      "pm_negative_reactive_energy_total": {
+      "past_month_negative_reactive_energy_total": {
         "name": "Past month: Negative reactive energy total"
       },
       "factory_number": {
@@ -139,6 +139,72 @@
       },
       "spodes_specification_version": {
         "name": "SPODES specification version"
+      },
+      "instantaneous_current_of_phase_b": {
+        "name": "Instantaneous current of phase B"
+      },
+      "instantaneous_current_of_phase_c": {
+        "name": "Instantaneous current of phase C"
+      },
+      "instantaneous_voltage_of_phase_b": {
+        "name": "Instantaneous voltage of phase B"
+      },
+      "instantaneous_voltage_of_phase_c": {
+        "name": "Instantaneous voltage of phase C"
+      },
+      "instantaneous_power_factor_of_phase_a": {
+        "name": "Instantaneous power factor of phase A"
+      },
+      "instantaneous_power_factor_of_phase_b": {
+        "name": "Instantaneous power factor of phase B"
+      },
+      "instantaneous_power_factor_of_phase_c": {
+        "name": "Instantaneous power factor of phase C"
+      },
+      "instantaneous_reactive_power_factor_of_phase_a": {
+        "name": "Instantaneous reactive power factor of phase A"
+      },
+      "instantaneous_reactive_power_factor_of_phase_b": {
+        "name": "Instantaneous reactive power factor of phase B"
+      },
+      "instantaneous_reactive_power_factor_of_phase_c": {
+        "name": "Instantaneous reactive power factor of phase C"
+      },
+      "instantaneous_apparent_power_of_phase_a": {
+        "name": "Instantaneous apparent power of phase A"
+      },
+      "instantaneous_apparent_power_of_phase_b": {
+        "name": "Instantaneous apparent power of phase B"
+      },
+      "instantaneous_apparent_power_of_phase_c": {
+        "name": "Instantaneous apparent power of phase C"
+      },
+      "instantaneous_active_power_of_phase_a": {
+        "name": "Instantaneous active power of phase A"
+      },
+      "instantaneous_active_power_of_phase_b": {
+        "name": "Instantaneous active power of phase B"
+      },
+      "instantaneous_active_power_of_phase_c": {
+        "name": "Instantaneous active power of phase C"
+      },
+      "instantaneous_reactive_power_of_phase_a": {
+        "name": "Instantaneous reactive power of phase A"
+      },
+      "instantaneous_reactive_power_of_phase_b": {
+        "name": "Instantaneous reactive power of phase B"
+      },
+      "instantaneous_reactive_power_of_phase_c": {
+        "name": "Instantaneous reactive power of phase C"
+      },
+      "instantaneous_line_to_line_voltage_ab": {
+        "name": "Instantaneous line-to-line voltage AB"
+      },
+      "instantaneous_line_to_line_voltage_bc": {
+        "name": "Instantaneous line-to-line voltage BC"
+      },
+      "instantaneous_line_to_line_voltage_ac": {
+        "name": "Instantaneous line-to-line voltage AC"
       }
     }
   }
